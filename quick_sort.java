@@ -1,65 +1,55 @@
 import java.util.*;
-public class quick_sort
-{
-    public static int partition(int[] a,int l,int h)
+class QuickSort
+{    public static int[] a = new int[5];
+    public static void main(String args[])
     {
-        System.out.println("Before sort : ");
-        int pivot = a[l];
-        int i=l+1;
-        int j=h;
-        while(i<=j)
+       
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Elements : ");
+        for(int i=0;i<5;i++)
         {
-            while(i<=j && a[i]<=pivot) i++;
-
-           
-            while(i<=j && a[j]>pivot) j--;
-
-            if(i<j)
-            {
-                int temp=a[i];
-                a[i]=a[j];
-                a[j]=temp;
-            }
+            a[i]=sc.nextInt();
         }
-                int temp=a[l];
-                a[l]=a[j];
-                a[j]=temp;
-
-                return j;
-    }
-
-    public static void display(int[] a)
-    {   for(int i : a)
+        QuickSortArr(0,4);
+        System.out.println("Sorted array now !!");
+        for(int i=0;i<a.length;i++)
         {
-            System.out.println(i);
+             System.out.print(a[i]+" ");
         }
     }
-
-    public static void quicksort(int[] a,int l,int h)
+    public static void QuickSortArr(int l,int h)
     {
         if(l<h)
         {
-            int k =partition(a,l,h);
-            quicksort(a,l,k-1);
-            quicksort(a,k+1,h);
+            int j = partition(l,h);
+            QuickSortArr(l,j-1);
+            QuickSortArr(j+1,h);
         }
     }
-    public static void main(String args[])
-    {   int n=5;
-        int[] arr = new int[n];
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Entervalues inside array : ");
-        
-        for(int i=0;i<n;i++)
-        {
-            arr[i]=sc.nextInt();
-        }
-        
-        System.out.println("Before sort : ");
-        display(arr);
-        quicksort(arr,0,n-1);
-        System.out.println("\nSorted Array is:");
-        display(arr);
+    public static int partition(int l, int h) {
+        int pivot = a[l];
+        int i = l + 1;  
+        int j = h;
     
+        while (i <= j) {
+            while (i <= j && a[i] <= pivot) {
+                i++;
+            }
+            while (a[j] > pivot) {
+                j--;
+            }
+            if (i < j) {
+                int temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+        }
+    
+        int temp = a[j];
+        a[j] = a[l];
+        a[l] = temp;
+    
+        return j;
     }
+    
 }
